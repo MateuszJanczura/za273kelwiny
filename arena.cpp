@@ -12,58 +12,63 @@ using namespace std;
 class arena
 {
 	private:
-		void tura();
 		vector <bot> boty; 
 		int unikalnyNumer; 
 		
+		int nadajNazwe(int a);
+		void tura();
+		void inicjalizacja();
+		void licytujPrzedmiot(int wartosc);
+		
 	public:
-		int pozostalePrzedmioty;
+		int pozostalePrzedmioty; 
+		
 		arena();
 		arena(int l);
 		arena(vector<bot> bots);
-		double zapytaniePrawdopodobienstwo();
+		
+		void dodajBota(bot a, int b);
 		vector <bot> ranking();
-		int zapytanieWartosc();
 		void licytacja();
-		void licytujPrzedmiot(int wartosc);
-		int id();
 };
 
-arena::arena()
+int arena::nadajNazwe(int a = 0)
 {
-	unikalnyNumer = 0;
+	if(!a) return unikalnyNumer++; 
+	return a;
 }
 
-int arena::id()
-{
-	return unikalnyNumer++; 
-}
-
-arena::arena(int l)
+void arena::inicjalizacja()
 {
 	unikalnyNumer = 0;
+	boty.resize(0);
 	srand(time(0));
+}
+
+void arena::dodajBota(bot a, int b = 0)
+{
+	boty.push_back(a);
+	boty[boty.size() - 1].nazwa = nadajNazwe(b);
+}
+
+arena::arena()  // tworzenie podstawowej areny
+{
+	inicjalizacja();
+}
+
+arena::arena(int l) // tworzenie areny i l losowych botow
+{
+	inicjalizacja();
 	for(int i = 0; i < l; i++) 
 	{
-		boty.push_back(bot((double)(rand()%100)/100.0,(double)(rand()%100)/100.0,(double)(rand()%100)/100.0, 1000));
-		boty[i].nazwa = id();
+		dodajBota(bot((double)(rand()%100)/100.0,(double)(rand()%100)/100.0,(double)(rand()%100)/100.0, 1000));
 	}
 }
 
-arena::arena(vector<bot> boty2)
+arena::arena(vector<bot> boty2) // tworzenie areny i botow z vektora
 {
-	unikalnyNumer = 0;
-	for(unsigned int i = 0; i < boty2.size(); i++) 
-	{
-		boty.push_back(boty2[i]);
-		boty[i].nazwa = id();
-	}
-}
-
-vector <bot> arena::ranking()
-{
-	sort(boty.begin(), boty.end());
-	return boty;
+	inicjalizacja();
+	for(unsigned int i = 0; i < boty2.size(); i++) dodajBota(boty2[i]);
 }
 
 void arena::licytujPrzedmiot(int wartosc)
@@ -88,6 +93,7 @@ void arena::licytujPrzedmiot(int wartosc)
 	if(flaga) boty[ostatniLicytujacy].sPrzedmioty += wartosc;
 	for(unsigned int i = 0; i < boty.size(); i++) boty[i].sKonta -= kwota[i];
 	
+	//Wypisywanie przebiegu licytacji: 
 	if(flaga)
 	{
 		printf("Sprzedano %d za %d dla %d\n", wartosc, stanLicytacji, boty[ostatniLicytujacy].nazwa);
@@ -102,4 +108,10 @@ void arena::licytacja()
 	{
 		licytujPrzedmiot(rand() % 200 + 100);
 	}
+}
+
+vector <bot> arena::ranking()
+{
+	sort(boty.begin(), boty.end());
+	return boty;
 }
