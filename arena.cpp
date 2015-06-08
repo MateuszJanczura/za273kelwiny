@@ -50,9 +50,14 @@ arena::arena(int l)
 	}
 }
 
-arena::arena(vector<bot> boty)
+arena::arena(vector<bot> boty2)
 {
 	unikalnyNumer = 0;
+	for(unsigned int i = 0; i < boty2.size(); i++) 
+	{
+		boty.push_back(boty2[i]);
+		boty[i].nazwa = id();
+	}
 }
 
 vector <bot> arena::ranking()
@@ -63,7 +68,7 @@ vector <bot> arena::ranking()
 
 void arena::licytujPrzedmiot(int wartosc)
 {
-	int ostatniLicytujacy = 0, licytujacy = 0, stanLicytacji = 1;
+	int ostatniLicytujacy = rand() % boty.size(), licytujacy = (ostatniLicytujacy + 1) % boty.size(), stanLicytacji = 1;
 	bool flaga = false;
 	vector <int> kwota;
 	kwota.resize(boty.size(), 0);
@@ -83,7 +88,11 @@ void arena::licytujPrzedmiot(int wartosc)
 	if(flaga) boty[ostatniLicytujacy].sPrzedmioty += wartosc;
 	for(unsigned int i = 0; i < boty.size(); i++) boty[i].sKonta -= kwota[i];
 	
-	if(flaga) printf("Sprzedano %d za %d dla %d\n", wartosc, stanLicytacji, boty[ostatniLicytujacy].nazwa);
+	if(flaga)
+	{
+		printf("Sprzedano %d za %d dla %d\n", wartosc, stanLicytacji, boty[ostatniLicytujacy].nazwa);
+		for(unsigned int i = 0; i < boty.size(); i++) if(kwota[i]) printf("\tBot %d zaplacil %d, stan konta bota: %d, przedmioty %d\n",boty[i].nazwa, kwota[i], boty[i].sKonta, boty[i].sPrzedmioty);
+	}
 	else printf("Nikt nie kupil %d\n", wartosc);
 }
 
