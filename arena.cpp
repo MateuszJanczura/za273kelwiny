@@ -1,4 +1,4 @@
-/* Wersja gdy (1) liczba tur jest znana, (2) standardowej wersji gry o dolara [brak oplaty za podbicie], (3) gra sekwencyjna, (4) kupione przedmioty nie sa dodawane do gotowki*/
+/* Wersja gdy (1) liczba tur jest znana, (2) standardowej wersji gry o dolara [brak oplaty za podbicie], (3) gra sekwencyjna, (4) kupione przedmioty nie sa dodawane do gotowki, a ranking zalezy od wartosci kupionych przedmiotow*/
 
 #include <vector>
 #include <cstdlib>
