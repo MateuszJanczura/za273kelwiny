@@ -8,7 +8,7 @@ class bot
 {
 	public:
 		double sA, sB, sC; //parametry bota
-		int sKonta, sPrzedmioty;
+		int sKonta, sPrzedmioty, nazwa;
 		bot();
 		bot(double x, double y, double z, int konto);
 		bool wynik(int cena, int wartoscPrzedmiotu);
@@ -17,10 +17,12 @@ class bot
 
 bot::bot()
 {
+	sKonta = sPrzedmioty = 0;
 }
 
 bot::bot(double x, double y, double z, int konto)
 {
+	sKonta = sPrzedmioty = 0;
 	sA = x;
 	sB = y;
 	sC = z;
