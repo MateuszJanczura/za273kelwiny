@@ -18,7 +18,7 @@ int main()
 	
 	printf("\n----------------------------\n\n");
 	
-	//Arena dla 5 botow o okreslonych cechach z listy, rywalizujacych o 3 przedmioty;	
+	// Arena dla 5 botow o okreslonych cechach z listy, rywalizujacych o 3 przedmioty;	
 	vector <bot> o;
 	o.push_back(bot(0,0,0,100)); 	 // bot o wektorze [0,0,0] i stanie konta 100
 	o.push_back(bot(0.7,0.3,0,100)); // bot o wektorze [0.7,0.3,0] i stanie konta 100
@@ -34,7 +34,7 @@ int main()
 	
 	printf("\n----------------------------\n\n");
 	
-	//Arena dla 3 botow o okreslonych cechach manualnie, rywalizujacych o 5 przedmiotyow	
+	// Arena dla 3 botow o okreslonych cechach manualnie, rywalizujacych o 5 przedmiotyow	
 	a = new arena;
 	a -> dodajBota(bot(1,1,1,19));  // bot o wektorze [1,1,1] i stanie konta 19
 	a -> dodajBota(bot(1,0,1,111)); // bot o wektorze [1,1,1] i stanie konta 111
@@ -47,11 +47,11 @@ int main()
 	
 	printf("\n----------------------------\n\n");
 	
-	//Arena dla 3 botow o okreslonych cechach manualnie, rywalizujacych o nieokreslona liczbe przedmiotow, prawdopodobienstwo nastepnego 0,81 ale nie wiecej niz 10 przedmiotow	
+	// Arena dla 3 botow o okreslonych cechach manualnie, rywalizujacych o nieokreslona liczbe przedmiotow, prawdopodobienstwo nastepnego 0,81 ale nie wiecej niz 10 przedmiotow	
 	a = new arena;
-	a -> dodajBota(bot(1,1,1,19)); // bot o wektorze [1,1,1] i stanie konta 19
+	a -> dodajBota(bot(1,1,1,19));  // bot o wektorze [1,1,1] i stanie konta 19
 	a -> dodajBota(bot(1,0,1,111)); // bot o wektorze [1,1,1] i stanie konta 111
-	a -> dodajBota(bot(0,1,0,14)); // bot o wektorze [1,1,1] i stanie konta 14
+	a -> dodajBota(bot(0,1,0,14));  // bot o wektorze [1,1,1] i stanie konta 14
  	a -> ustawieniaLicytacji(10, 0.81);
 	a -> licytacja();
 	ranking = a -> ranking();
