@@ -1,4 +1,4 @@
-/* Wersja gdy (1) liczba tur jest znana, (2) standardowej wersji gry o dolara [brak oplaty za podbicie], (3) gra sekwencyjna, (4) kupione przedmioty nie sa dodawane do gotowki, a ranking zalezy od wartosci kupionych przedmiotow*/
+/* Wersja gdy (1) maksymalna liczba tur jest znana i prawdopodobienstow kolejnej licytacji znane, (2) standardowej wersji gry o dolara [brak oplaty za podbicie], (3) gra sekwencyjna lub jednoczesna, (4) kupione przedmioty nie sa dodawane do gotowki, a ranking zalezy od wartosci kupionych przedmiotow*/
 
 #include <vector>
 #include <cstdlib>
@@ -14,6 +14,8 @@ class arena
 	private:
 		vector <bot> boty; 
 		int unikalnyNumer; 
+		int pozostalePrzedmiotyMax; 
+		double prawdopodobienstwoNastepnego;
 		
 		int nadajNazwe(int a);
 		void tura();
@@ -21,14 +23,14 @@ class arena
 		void licytujPrzedmiot(int wartosc);
 		
 	public:
-		int pozostalePrzedmioty; 
-		
 		arena();
 		arena(int l);
 		arena(vector<bot> bots);
 		
+		bool czyNastepny();
 		void dodajBota(bot a, int b);
 		vector <bot> ranking();
+		void ustawieniaLicytacji(int a, double b);
 		void licytacja();
 };
 
@@ -45,6 +47,12 @@ void arena::inicjalizacja()
 	srand(time(0));
 }
 
+void arena::ustawieniaLicytacji(int a, double b)
+{
+	pozostalePrzedmiotyMax = a;
+	prawdopodobienstwoNastepnego = b;
+}
+		
 void arena::dodajBota(bot a, int b = 0)
 {
 	boty.push_back(a);
@@ -63,6 +71,14 @@ arena::arena(int l) // tworzenie areny i l losowych botow
 	{
 		dodajBota(bot((double)(rand()%100)/100.0,(double)(rand()%100)/100.0,(double)(rand()%100)/100.0, 1000));
 	}
+}
+
+bool arena::czyNastepny()
+{
+	int los = rand() % 1000 + 1;
+	pozostalePrzedmiotyMax--;
+	if((prawdopodobienstwoNastepnego * 1000 > los) && (pozostalePrzedmiotyMax > -1)) return true;
+	return false;
 }
 
 arena::arena(vector<bot> boty2) // tworzenie areny i botow z vektora
@@ -104,7 +120,7 @@ void arena::licytujPrzedmiot(int wartosc)
 
 void arena::licytacja()
 {
-	while(pozostalePrzedmioty--)
+	while(czyNastepny())
 	{
 		licytujPrzedmiot(rand() % 200 + 100);
 	}

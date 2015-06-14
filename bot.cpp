@@ -4,6 +4,7 @@
 #include <ctime>
 #include <algorithm>
 
+
 class bot
 {
 	private:

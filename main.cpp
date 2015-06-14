@@ -11,7 +11,7 @@ int main()
 	
 	// Arena dla 10 losowych botow, rywalizujacych o 10 przedmiotow
 	a = new arena(10);
-	a -> pozostalePrzedmioty = 10;
+ 	a -> ustawieniaLicytacji(10, 1);
 	a -> licytacja();
 	ranking = a -> ranking();
 	delete(a);
@@ -27,7 +27,7 @@ int main()
 	o.push_back(bot(0,1,0,100)); // bot o wektorze [0,1,0] i stanie konta 100
 	o.push_back(bot(0,0,1,100)); // bot o wektorze [0,0,1] i stanie konta 100
 	a = new arena(o);
-	a -> pozostalePrzedmioty = 3;
+ 	a -> ustawieniaLicytacji(3, 1);
 	a -> licytacja();
 	ranking = a -> ranking();
 	delete(a);
@@ -40,11 +40,25 @@ int main()
 	a -> dodajBota(bot(1,1,1,19)); // bot o wektorze [1,1,1] i stanie konta 19
 	a -> dodajBota(bot(1,0,1,111)); // bot o wektorze [1,1,1] i stanie konta 111
 	a -> dodajBota(bot(0,1,0,14)); // bot o wektorze [1,1,1] i stanie konta 14
- 	a -> pozostalePrzedmioty = 5;
+ 	a -> ustawieniaLicytacji(5, 1);
 	a -> licytacja();
 	ranking = a -> ranking();
 	delete(a);
 	for(unsigned int i = 0; i < ranking.size(); i++) printf("#%d: Bot %d (%.2f, %.2f, %.2f) Przedmioty: %d, Konto: %d\n", i+1, ranking[i].nazwa, ranking[i].sA,ranking[i].sB,ranking[i].sC,ranking[i].sPrzedmioty, ranking[i].sKonta);
+	
+	printf("\n----------------------------\n\n");
+	
+	//Arena dla 3 botow o okreslonych cechach manualnie, rywalizujacych o nieokreslona liczbe przedmiotow, prawdopodobienstwo nastepnego 0,81 ale nie wiecej niz 10 przedmiotow	
+	a = new arena;
+	a -> dodajBota(bot(1,1,1,19)); // bot o wektorze [1,1,1] i stanie konta 19
+	a -> dodajBota(bot(1,0,1,111)); // bot o wektorze [1,1,1] i stanie konta 111
+	a -> dodajBota(bot(0,1,0,14)); // bot o wektorze [1,1,1] i stanie konta 14
+ 	a -> ustawieniaLicytacji(10, 0.81);
+	a -> licytacja();
+	ranking = a -> ranking();
+	delete(a);
+	for(unsigned int i = 0; i < ranking.size(); i++) printf("#%d: Bot %d (%.2f, %.2f, %.2f) Przedmioty: %d, Konto: %d\n", i+1, ranking[i].nazwa, ranking[i].sA,ranking[i].sB,ranking[i].sC,ranking[i].sPrzedmioty, ranking[i].sKonta);
+	
 	
 	return 0;
 }
