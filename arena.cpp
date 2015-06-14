@@ -29,7 +29,7 @@ class arena
 		arena(vector<bot> bots);
 		
 		bool czyNastepny();
-		void dodajBota(bot a, int b);
+		void dodajBota(bot a, int b = 0);
 		vector <bot> ranking();
 		void ustawieniaLicytacji(int a, double b);
 		void licytacja();
@@ -126,7 +126,7 @@ void arena::ustawieniaLicytacji(int a, double b)
 	prawdopodobienstwoNastepnego = b;
 }
 		
-void arena::dodajBota(bot a, int b = 0)
+void arena::dodajBota(bot a, int b)
 {
 	boty.push_back(a);
 	boty[boty.size() - 1].nazwa = nadajNazwe(b);
