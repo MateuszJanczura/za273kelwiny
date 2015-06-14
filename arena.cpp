@@ -35,30 +35,7 @@ class arena
 		void licytacja();
 };
 
-int arena::nadajNazwe(int a = 0)
-{
-	if(!a) return unikalnyNumer++; 
-	return a;
-}
-
-void arena::inicjalizacja()
-{
-	unikalnyNumer = 0;
-	boty.resize(0);
-	srand(time(0));
-}
-
-void arena::ustawieniaLicytacji(int a, double b)
-{
-	pozostalePrzedmiotyMax = a;
-	prawdopodobienstwoNastepnego = b;
-}
-		
-void arena::dodajBota(bot a, int b = 0)
-{
-	boty.push_back(a);
-	boty[boty.size() - 1].nazwa = nadajNazwe(b);
-}
+// ------------------------------- Konstruktory -------------------------------------------------
 
 arena::arena()  // tworzenie podstawowej areny
 {
@@ -74,18 +51,28 @@ arena::arena(int l) // tworzenie areny i l losowych botow
 	}
 }
 
-bool arena::czyNastepny()
-{
-	int los = rand() % 1000 + 1;
-	pozostalePrzedmiotyMax--;
-	if((prawdopodobienstwoNastepnego * 1000 > los) && (pozostalePrzedmiotyMax > -1)) return true;
-	return false;
-}
-
 arena::arena(vector<bot> boty2) // tworzenie areny i botow z vektora
 {
 	inicjalizacja();
 	for(unsigned int i = 0; i < boty2.size(); i++) dodajBota(boty2[i]);
+}
+
+
+
+
+// ----------------------- Funkcje prywatne ------------------------------------
+
+int arena::nadajNazwe(int a = 0)
+{
+	if(!a) return unikalnyNumer++; 
+	return a;
+}
+
+void arena::inicjalizacja()
+{
+	unikalnyNumer = 0;
+	boty.resize(0);
+	srand(time(0));
 }
 
 void arena::licytujPrzedmiot(int wartosc)
@@ -117,6 +104,32 @@ void arena::licytujPrzedmiot(int wartosc)
 		for(unsigned int i = 0; i < boty.size(); i++) if(kwota[i]) printf("\tBot %d zaplacil %d, stan konta bota: %d, przedmioty %d\n",boty[i].nazwa, kwota[i], boty[i].sKonta, boty[i].sPrzedmioty);
 	}
 	else printf("Nikt nie kupil %d\n", wartosc);
+}
+
+
+
+// ----------------------- Funkcje publiczne -----------------------------------
+
+
+bool arena::czyNastepny()
+{
+	int los = rand() % 1000 + 1;
+	pozostalePrzedmiotyMax--;
+	if((prawdopodobienstwoNastepnego * 1000 > los) && (pozostalePrzedmiotyMax > -1)) return true;
+	return false;
+}
+
+
+void arena::ustawieniaLicytacji(int a, double b)
+{
+	pozostalePrzedmiotyMax = a;
+	prawdopodobienstwoNastepnego = b;
+}
+		
+void arena::dodajBota(bot a, int b = 0)
+{
+	boty.push_back(a);
+	boty[boty.size() - 1].nazwa = nadajNazwe(b);
 }
 
 void arena::licytacja()
