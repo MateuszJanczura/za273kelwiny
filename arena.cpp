@@ -6,6 +6,7 @@
 #include <ctime>
 #include <cstdio>
 #include <algorithm>
+#include <random>
 #include "bot.cpp"
 using namespace std;
 
