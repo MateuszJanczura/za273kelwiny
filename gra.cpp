@@ -2,6 +2,7 @@
 #define classGra
 
 #include "arena.cpp"
+using namespace std;
 
 class gra
 {
@@ -15,5 +16,15 @@ class gra
 		
 		vector <bot> wynik();
 };
+
+// -------------------------- Konstruktory ----------------------------
+
+
+// ----------------------- Funkcje prywatne ---------------------------
+
+
+// ----------------------- Funkcje publiczne --------------------------
+
+
 
 #endif
