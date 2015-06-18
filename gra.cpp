@@ -23,6 +23,7 @@ class gra
 		gra(int a);
 		gra(vector<bot> a, int b);
 		
+		void ustawieniaGry(int a);
 		vector <bot> wynik();
 };
 
@@ -54,6 +55,16 @@ void gra::inicjalizacja()
 
 // ----------------------- Funkcje publiczne --------------------------
 
+void gra::ustawieniaGry(int a)
+{
+	iloscTur = a;
+}
+
+vector <bot> gra::wynik()
+{
+	sort(boty.begin(), boty.end());
+	return boty;
+}
 
 
 #endif
