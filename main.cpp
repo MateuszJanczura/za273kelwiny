@@ -1,6 +1,8 @@
 #include <cstdio>
 #include <cstdlib>
+#include "bot.cpp"
 #include "arena.cpp"
+#include "gra.cpp"
 using namespace std;
 
 int main()

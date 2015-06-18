@@ -1,3 +1,6 @@
+#ifndef classArena
+#define classArena
+
 /* Wersja gdy (1) maksymalna liczba tur jest znana i prawdopodobienstow kolejnej licytacji znane, (2) standardowej wersji gry o dolara [brak oplaty za podbicie], (3) gra sekwencyjna lub jednoczesna, (4) kupione przedmioty nie sa dodawane do gotowki, a ranking zalezy od wartosci kupionych przedmiotow*/
 
 #include <vector>
@@ -145,3 +148,5 @@ vector <bot> arena::ranking()
 	sort(boty.begin(), boty.end());
 	return boty;
 }
+
+#endif

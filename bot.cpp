@@ -1,3 +1,6 @@
+#ifndef classBot
+#define classBot
+
 #include <vector>
 #include <cstdlib>
 #include <iostream>
@@ -9,7 +12,7 @@ class bot
 {
 	private:
 		void inicjalizacja();
-		
+		void mutacja();
 		
 	public:
 		double sA, sB, sC; //parametry bota
@@ -43,6 +46,7 @@ bot::bot(bot* a)
 bot::bot(bot* a, bot* b)
 {
 	inicjalizacja();
+	mutacja();
 }
 
 bot::bot(double x, double y, double z, int konto)
@@ -56,6 +60,9 @@ bot::bot(double x, double y, double z, int konto)
 
 
 // ------------------------------------- Funkcje prywatne -------------------------------- 
+void bot::mutacja()
+{
+}
 
 void bot::inicjalizacja()
 {
@@ -69,3 +76,5 @@ bool bot::wynik(int cena, int wartoscPrzedmiotu)
 {
 	return rand() % 2;
 }
+
+#endif
