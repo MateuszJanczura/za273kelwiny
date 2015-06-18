@@ -24,8 +24,10 @@ class bot
 		bool operator< (bot const &q) const {return sPrzedmioty > q.sPrzedmioty;} // bot jest mniejszy od innego jesli posiada gorsze przedmioty
 };
 
-
-// ------------------------------------- Konstruktory ------------------------------------
+void bot::inicjalizacja()
+{
+	sKonta = sA = sB = sC = sPrzedmioty = 0;
+}
 
 bot::bot()
 {
@@ -53,17 +55,6 @@ bot::bot(double x, double y, double z, int konto)
 	sC = z;
 	sKonta = konto;
 }
-
-
-// ------------------------------------- Funkcje prywatne -------------------------------- 
-
-void bot::inicjalizacja()
-{
-	sKonta = sA = sB = sC = sPrzedmioty = 0;
-}
-
-
-// ------------------------------------- Funkcje publiczne -------------------------------
 
 bool bot::wynik(int cena, int wartoscPrzedmiotu)
 {
