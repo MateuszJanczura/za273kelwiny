@@ -5,7 +5,9 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
+#include <cstdio>
 #include <algorithm>
+#include <random>
 using namespace std;
 
 
