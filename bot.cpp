@@ -10,8 +10,6 @@
 #include <random>
 using namespace std;
 
-class arena;
-class bot;
 
 class bot
 {
@@ -28,35 +26,10 @@ class bot
 		bot(bot* a, bot* b); //konstruktor krzyzowania
 		bot(double x, double y, double z, int konto);
 		
-		bool wynik(arena* aren);
+		bool wynik(int cena, int wartoscPrzedmiotu);
 		bool operator< (bot const &q) const {return sPrzedmioty > q.sPrzedmioty;} // bot jest mniejszy od innego jesli posiada gorsze przedmioty
 };
 
-class arena
-{
-	private:
-		vector <bot> boty; 
-		int unikalnyNumer; 
-		int pozostalePrzedmiotyMax; 
-		double prawdopodobienstwoNastepnego;
-		
-		int nadajNazwe(int a);
-		void tura();
-		void inicjalizacja();
-		void licytujPrzedmiot(int wartosc);
-		
-	public:
-		arena();
-		arena(int l);
-		arena(vector<bot> bots);
-		
-		int stala;
-		bool czyNastepny();
-		void dodajBota(bot a, int b = 0);
-		vector <bot> ranking();
-		void ustawieniaLicytacji(int a, double b);
-		void licytacja();
-};
 
 // ------------------------------------- Konstruktory ------------------------------------
 
@@ -102,9 +75,9 @@ void bot::inicjalizacja()
 
 // ------------------------------------- Funkcje publiczne -------------------------------
 
-bool bot::wynik(arena* aren)
+bool bot::wynik(int cena, int wartoscPrzedmiotu)
 {
-	return aren -> stala;
+	return rand() % 2;
 }
 
 #endif
