@@ -1,83 +1,140 @@
 #ifndef classBot
 #define classBot
 
-#include <vector>
-#include <cstdlib>
-#include <iostream>
-#include <ctime>
-#include <cstdio>
 #include <algorithm>
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 #include <random>
+#include <vector>
 using namespace std;
 
-
-class bot
+class Bot
 {
 	private:
-		void inicjalizacja();
-		void mutacja();
-		
+        //parameters of the bot
+        double pA;
+        double pB;
+        double pC;
+        int balance;
+
+        //results of the arena
+        vector<int> results;
+
+		void mutate();
+
 	public:
-		double sA, sB, sC; //parametry bota
-		int sKonta, sPrzedmioty, nazwa;
-		
-		bot();
-		bot(bot* a); //konstruktor kopiujacy
-		bot(bot* a, bot* b); //konstruktor krzyzowania
-		bot(double x, double y, double z, int konto);
-		
-		bool wynik(int cena, int wartoscPrzedmiotu);
-		bool operator< (bot const &q) const {return sPrzedmioty > q.sPrzedmioty;} // bot jest mniejszy od innego jesli posiada gorsze przedmioty
+        //constructors
+		Bot(Bot* a);
+		Bot(Bot* a, Bot* b);
+		Bot(double a=0, double b=0, double c=0, int bal=0) : pA(a), pB(b), pC(c), balance(bal) {};
+
+		//results management
+		void addResult(int a);
+		void clearResults();
+		double averageResult();
+		double standardDeviation();
+		double value();
+
+        bool operator<(Bot a)
+        {
+            if(results.size()==a.results.size())
+            {
+                return value() < a.value();
+            }
+            else
+                return results.size() < a.results.size();
+        }
+
+        //printing
+		void print();
+		void printCompressed();
+		string toString();
+		string toStringCompressed();
 };
 
-
-// ------------------------------------- Konstruktory ------------------------------------
-
-bot::bot()
+Bot::Bot(Bot* a)
 {
-	inicjalizacja();
+	pA = a -> pA;
+	pB = a -> pB;
+	pC = a -> pC;
+	balance = a -> balance;
 }
 
-bot::bot(bot* a)
+Bot::Bot(Bot* a, Bot* b)
 {
-	inicjalizacja();
-	sA = a -> sA;
-	sB = a -> sB;
-	sC = a -> sC;
+	pA = (a->pA + b->pA)/2;
+	pB = (a->pB + b->pB)/2;
+	pC = (a->pC + b->pC)/2;
+	balance = (a->balance + b->balance)/2;
+	mutate();
 }
 
-bot::bot(bot* a, bot* b)
+void Bot::mutate()
 {
-	inicjalizacja();
-	mutacja();
+    pA = pA *(1 + ((rand()%200)-100)/10000.0);
+    pB = pB *(1 + ((rand()%200)-100)/10000.0);
+    pC = pC *(1 + ((rand()%200)-100)/10000.0);
 }
 
-bot::bot(double x, double y, double z, int konto)
+void Bot::addResult(int a)
 {
-	inicjalizacja();
-	sA = x;
-	sB = y;
-	sC = z;
-	sKonta = konto;
+    results.push_back(a);
 }
 
-
-// ------------------------------------- Funkcje prywatne -------------------------------- 
-void bot::mutacja()
+void Bot::clearResults()
 {
+    results.clear();
 }
 
-void bot::inicjalizacja()
+double Bot::averageResult()
 {
-	sKonta = sA = sB = sC = sPrzedmioty = 0;
+    if(results.size()==0)
+    {
+        return -1;
+    }
+    else
+    {
+        double sum = 0;
+        for(int i=0; i<results.size(); ++i)
+        {
+            sum += results[i];
+        }
+        return sum / results.size();
+    }
 }
 
-
-// ------------------------------------- Funkcje publiczne -------------------------------
-
-bool bot::wynik(int cena, int wartoscPrzedmiotu)
+double Bot::standardDeviation()
 {
-	return rand() % 2;
+    if(results.size()==0)
+    {
+        double a = averageResult();
+        double sum = 0;
+        for(int i=0; i<results.size(); ++i)
+        {
+            sum += pow(results[i] - a,2);
+        }
+        sum /= results.size();
+        return sqrt(sum);
+    }
 }
 
+double Bot::value()
+{
+    return averageResult();
+}
+
+void Bot::print()
+{
+    cout << "bot [" << pA << "," << pB << "," << pC << "] with balance: " << balance << " value: " << value();
+}
+
+int main()
+{
+    Bot adam(1,1,1,1);
+    adam.addResult(5);
+    adam.addResult(10);
+    adam.print();
+}
 #endif

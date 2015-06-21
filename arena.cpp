@@ -13,24 +13,22 @@
 #include "bot.cpp"
 using namespace std;
 
-class arena
+class Arena
 {
 	private:
-		vector <bot> boty; 
-		int unikalnyNumer; 
-		int pozostalePrzedmiotyMax; 
+		vector <Bot> group;
+		int unikalnyNumer;
+		int pozostalePrzedmiotyMax;
 		double prawdopodobienstwoNastepnego;
-		
+
 		int nadajNazwe(int a);
 		void tura();
 		void inicjalizacja();
 		void licytujPrzedmiot(int wartosc);
-		
+
 	public:
-		arena();
-		arena(int l);
-		arena(vector<bot> bots);
-		
+		Arena();
+
 		bool czyNastepny();
 		void dodajBota(bot a, int b = 0);
 		vector <bot> ranking();
@@ -38,47 +36,22 @@ class arena
 		void licytacja();
 };
 
-// ------------------------------- Konstruktory -------------------------------------------------
-
-arena::arena()  // tworzenie podstawowej areny
-{
-	inicjalizacja();
-}
-
-arena::arena(int l) // tworzenie areny i l losowych botow
-{
-	inicjalizacja();
-	for(int i = 0; i < l; i++) 
-	{
-		dodajBota(bot((double)(rand()%100)/100.0,(double)(rand()%100)/100.0,(double)(rand()%100)/100.0, 1000));
-	}
-}
-
-arena::arena(vector<bot> boty2) // tworzenie areny i botow z vektora
-{
-	inicjalizacja();
-	for(unsigned int i = 0; i < boty2.size(); i++) dodajBota(boty2[i]);
-}
-
-
-
-
-// ----------------------- Funkcje prywatne ------------------------------------
-
-int arena::nadajNazwe(int a = 0)
-{
-	if(!a) return unikalnyNumer++; 
-	return a;
-}
-
-void arena::inicjalizacja()
+Arena::Arena()
 {
 	unikalnyNumer = 0;
-	boty.resize(0);
+	gloup.clear();
 	srand(time(0));
 }
 
-void arena::licytujPrzedmiot(int wartosc)
+// ----------------------- Funkcje prywatne ------------------------------------
+
+int Arena::nadajNazwe(int a = 0)
+{
+	if(!a) return unikalnyNumer++;
+	return a;
+}
+
+void Arena::licytujPrzedmiot(int wartosc)
 {
 	int ostatniLicytujacy = rand() % boty.size(), licytujacy = (ostatniLicytujacy + 1) % boty.size(), stanLicytacji = 1;
 	bool flaga = false;
@@ -86,7 +59,7 @@ void arena::licytujPrzedmiot(int wartosc)
 	kwota.resize(boty.size(), 0);
 	do
 	{
-		if(boty[licytujacy].wynik(stanLicytacji + 1, wartosc) && boty[licytujacy].sKonta >= stanLicytacji + 1) 
+		if(boty[licytujacy].wynik(stanLicytacji + 1, wartosc) && boty[licytujacy].sKonta >= stanLicytacji + 1)
 		{
 			stanLicytacji++;
 			kwota[licytujacy] = stanLicytacji;
@@ -99,8 +72,8 @@ void arena::licytujPrzedmiot(int wartosc)
 	while(licytujacy != ostatniLicytujacy);
 	if(flaga) boty[ostatniLicytujacy].sPrzedmioty += wartosc;
 	for(unsigned int i = 0; i < boty.size(); i++) boty[i].sKonta -= kwota[i];
-	
-	//Wypisywanie przebiegu licytacji: 
+
+	//Wypisywanie przebiegu licytacji:
 	if(flaga)
 	{
 		printf("Sprzedano %d za %d dla %d\n", wartosc, stanLicytacji, boty[ostatniLicytujacy].nazwa);
@@ -114,7 +87,7 @@ void arena::licytujPrzedmiot(int wartosc)
 // ----------------------- Funkcje publiczne -----------------------------------
 
 
-bool arena::czyNastepny()
+bool Arena::czyNastepny()
 {
 	int los = rand() % 1000 + 1;
 	pozostalePrzedmiotyMax--;
@@ -123,19 +96,19 @@ bool arena::czyNastepny()
 }
 
 
-void arena::ustawieniaLicytacji(int a, double b)
+void Arena::ustawieniaLicytacji(int a, double b)
 {
 	pozostalePrzedmiotyMax = a;
 	prawdopodobienstwoNastepnego = b;
 }
-		
-void arena::dodajBota(bot a, int b)
+
+void Arena::dodajBota(bot a, int b)
 {
 	boty.push_back(a);
 	boty[boty.size() - 1].nazwa = nadajNazwe(b);
 }
 
-void arena::licytacja()
+void Arena::licytacja()
 {
 	while(czyNastepny())
 	{
@@ -143,10 +116,5 @@ void arena::licytacja()
 	}
 }
 
-vector <bot> arena::ranking()
-{
-	sort(boty.begin(), boty.end());
-	return boty;
-}
 
 #endif
