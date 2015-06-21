@@ -1,6 +1,15 @@
 #ifndef classDef
 #define classDef
 
+#include <vector>
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+#include <cstdio>
+#include <algorithm>
+#include <random>
+using namespace std;
+
 class Bot;
 class Arena;
 class Population;
@@ -67,8 +76,8 @@ class Arena
 		Arena();
 
 		bool czyNastepny();
-		void dodajBota(bot a, int b = 0);
-		vector <bot> ranking();
+		void dodajBota(Bot a, int b = 0);
+		vector <Bot> ranking();
 		void ustawieniaLicytacji(int a, double b);
 		void licytacja();
 };

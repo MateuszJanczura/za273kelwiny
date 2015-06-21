@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <random>
+#include "class.cpp"
 #include "bot.cpp"
 using namespace std;
 
@@ -25,9 +26,9 @@ void Population::addBot(Bot a)
 
 void Population::print()
 {
-    for(int i=0; i<bots.size(); ++i)
+    for(unsigned int i=0; i<bots.size(); ++i)
     {
-        bots[i]print();
+        bots[i].print();
         cout << endl;
     }
 }

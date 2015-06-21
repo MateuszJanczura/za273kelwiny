@@ -10,7 +10,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <random>
-#include "class.php"
+#include "class.cpp"
 #include "bot.cpp"
 using namespace std;
 
@@ -31,7 +31,7 @@ int Arena::nadajNazwe(int a = 0)
 	return a;
 }
 
-void Arena::licytujPrzedmiot(int wartosc)
+/*void Arena::licytujPrzedmiot(int wartosc)
 {
 	int ostatniLicytujacy = rand() % boty.size(), licytujacy = (ostatniLicytujacy + 1) % boty.size(), stanLicytacji = 1;
 	bool flaga = false;
@@ -60,7 +60,7 @@ void Arena::licytujPrzedmiot(int wartosc)
 		for(unsigned int i = 0; i < boty.size(); i++) if(kwota[i]) printf("\tBot %d zaplacil %d, stan konta bota: %d, przedmioty %d\n",boty[i].nazwa, kwota[i], boty[i].sKonta, boty[i].sPrzedmioty);
 	}
 	else printf("Nikt nie kupil %d\n", wartosc);
-}
+}*/
 
 
 
@@ -82,7 +82,7 @@ void Arena::ustawieniaLicytacji(int a, double b)
 	prawdopodobienstwoNastepnego = b;
 }
 
-void Arena::dodajBota(bot a, int b)
+void Arena::dodajBota(Bot a, int b)
 {
 	boty.push_back(a);
 	boty[boty.size() - 1].nazwa = nadajNazwe(b);

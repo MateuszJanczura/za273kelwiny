@@ -8,7 +8,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#include "class.php"
+#include "class.cpp"
 using namespace std;
 
 
@@ -56,7 +56,7 @@ double Bot::averageResult()
     else
     {
         double sum = 0;
-        for(int i=0; i<results.size(); ++i)
+        for(unsigned int i=0; i<results.size(); ++i)
         {
             sum += results[i];
         }
@@ -70,13 +70,14 @@ double Bot::standardDeviation()
     {
         double a = averageResult();
         double sum = 0;
-        for(int i=0; i<results.size(); ++i)
+        for(unsigned int i=0; i<results.size(); ++i)
         {
             sum += pow(results[i] - a,2);
         }
         sum /= results.size();
         return sqrt(sum);
     }
+    return 0;
 }
 
 double Bot::value()

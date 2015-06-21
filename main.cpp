@@ -1,12 +1,12 @@
 #include <cstdio>
 #include <cstdlib>
-#include "class.php"
+#include "class.cpp"
 #include "bot.cpp"
 #include "arena.cpp"
 #include "population.cpp"
 using namespace std;
 
-int main()
+/*int main()
 {
 
 /* ---------------------- UZYCIE ARENY ------------------------------------
@@ -59,7 +59,8 @@ int main()
 	ranking = a -> ranking();
 	delete(a);
 	for(unsigned int i = 0; i < ranking.size(); i++) printf("#%d: Bot %d (%.2f, %.2f, %.2f) Przedmioty: %d, Konto: %d\n", i+1, ranking[i].nazwa, ranking[i].sA,ranking[i].sB,ranking[i].sC,ranking[i].sPrzedmioty, ranking[i].sKonta);
-*/
+
 
 	return 0;
 }
+*/
