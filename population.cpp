@@ -11,19 +11,7 @@
 #include "bot.cpp"
 using namespace std;
 
-class Population
-{
-	private:
-		int roundNumber;
-		vector<Bot> bots;
 
-	public:
-		Population(int rN=0): roundNumber(rN) {};
-
-		void gameSettings(int rN);
-		void addBot(Bot a);
-		void print();
-};
 
 void Population::gameSettings(int rN=0)
 {

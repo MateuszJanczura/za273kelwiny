@@ -1,8 +1,9 @@
 #include <cstdio>
 #include <cstdlib>
+#include "class.php"
 #include "bot.cpp"
 #include "arena.cpp"
-#include "gra.cpp"
+#include "population.cpp"
 using namespace std;
 
 int main()

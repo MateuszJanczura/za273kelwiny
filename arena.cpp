@@ -10,31 +10,11 @@
 #include <cstdio>
 #include <algorithm>
 #include <random>
+#include "class.php"
 #include "bot.cpp"
 using namespace std;
 
-class Arena
-{
-	private:
-		vector <Bot> group;
-		int unikalnyNumer;
-		int pozostalePrzedmiotyMax;
-		double prawdopodobienstwoNastepnego;
 
-		int nadajNazwe(int a);
-		void tura();
-		void inicjalizacja();
-		void licytujPrzedmiot(int wartosc);
-
-	public:
-		Arena();
-
-		bool czyNastepny();
-		void dodajBota(bot a, int b = 0);
-		vector <bot> ranking();
-		void ustawieniaLicytacji(int a, double b);
-		void licytacja();
-};
 
 Arena::Arena()
 {
