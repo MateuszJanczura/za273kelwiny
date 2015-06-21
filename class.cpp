@@ -33,7 +33,7 @@ class Bot
         //constructors
 		Bot(Bot* a);
 		Bot(Bot* a, Bot* b);
-		Bot(double a=0, double b=0, double c=0, int bal=0) : pA(a), pB(b), pC(c), balance(bal) {};
+		Bot(double a=0, double b=0, double c=0, int bal=0): pA(a), pB(b), pC(c), balance(bal) {};
 
 		//results management
 		void addResult(int a);

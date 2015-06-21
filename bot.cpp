@@ -12,7 +12,6 @@
 using namespace std;
 
 
-
 Bot::Bot(Bot* a)
 {
 	pA = a -> pA;
