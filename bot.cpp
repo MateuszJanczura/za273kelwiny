@@ -10,74 +10,50 @@
 #include <random>
 using namespace std;
 
-
-class bot
+class Bot
 {
 	private:
-		void inicjalizacja();
-		void mutacja();
-		
+        //parameters of the bot
+        double pA;
+        double pB;
+        double pC;
+        int balance;
+		void mutate();
+
 	public:
-		double sA, sB, sC; //parametry bota
-		int sKonta, sPrzedmioty, nazwa;
-		
-		bot();
-		bot(bot* a); //konstruktor kopiujacy
-		bot(bot* a, bot* b); //konstruktor krzyzowania
-		bot(double x, double y, double z, int konto);
-		
-		bool wynik(int cena, int wartoscPrzedmiotu);
-		bool operator< (bot const &q) const {return sPrzedmioty > q.sPrzedmioty;} // bot jest mniejszy od innego jesli posiada gorsze przedmioty
+
+		Bot(Bot* a);
+		Bot(Bot* a, Bot* b);
+		Bot(double a=0, double b=0, double c=0, int bal=0) : pA(a), pB(b), pC(c), balance(bal) {};
+		void print();
 };
 
-
-// ------------------------------------- Konstruktory ------------------------------------
-
-bot::bot()
+Bot::Bot(Bot* a)
 {
-	inicjalizacja();
+	pA = a -> pA;
+	pB = a -> pB;
+	pC = a -> pC;
+	balance = a -> balance;
 }
 
-bot::bot(bot* a)
+Bot::Bot(Bot* a, Bot* b)
 {
-	inicjalizacja();
-	sA = a -> sA;
-	sB = a -> sB;
-	sC = a -> sC;
+	pA = (a->pA + b->pA)/2;
+	pB = (a->pB + b->pB)/2;
+	pC = (a->pC + b->pC)/2;
+	balance = (a->balance + b->balance)/2;
+	mutate();
 }
 
-bot::bot(bot* a, bot* b)
+void Bot::mutate()
 {
-	inicjalizacja();
-	mutacja();
+    pA = pA *(1 + ((rand()%200)-100)/10000.0);
+    pB = pB *(1 + ((rand()%200)-100)/10000.0);
+    pC = pC *(1 + ((rand()%200)-100)/10000.0);
 }
 
-bot::bot(double x, double y, double z, int konto)
+void Bot::print()
 {
-	inicjalizacja();
-	sA = x;
-	sB = y;
-	sC = z;
-	sKonta = konto;
+    cout << "bot's parameters: " << pA << " " << pB << " " << pC << " balance: " << balance;
 }
-
-
-// ------------------------------------- Funkcje prywatne -------------------------------- 
-void bot::mutacja()
-{
-}
-
-void bot::inicjalizacja()
-{
-	sKonta = sA = sB = sC = sPrzedmioty = 0;
-}
-
-
-// ------------------------------------- Funkcje publiczne -------------------------------
-
-bool bot::wynik(int cena, int wartoscPrzedmiotu)
-{
-	return rand() % 2;
-}
-
 #endif
