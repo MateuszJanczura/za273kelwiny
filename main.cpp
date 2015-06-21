@@ -10,7 +10,7 @@ int main()
 	arena* a;
 	vector <bot> ranking;
 	
-/* ---------------------- UZYCIE ARENY ------------------------------------	
+// ---------------------- UZYCIE ARENY ------------------------------------	
 	// Arena dla 10 losowych botow, rywalizujacych o 10 przedmiotow
 	a = new arena(10);
  	a -> ustawieniaLicytacji(10, 1);
@@ -60,9 +60,8 @@ int main()
 	ranking = a -> ranking();
 	delete(a);
 	for(unsigned int i = 0; i < ranking.size(); i++) printf("#%d: Bot %d (%.2f, %.2f, %.2f) Przedmioty: %d, Konto: %d\n", i+1, ranking[i].nazwa, ranking[i].sA,ranking[i].sB,ranking[i].sC,ranking[i].sPrzedmioty, ranking[i].sKonta);
-*/
+
 	
-	ranking.push_back(bot(1,1,1));
 	
 	return 0;
 }

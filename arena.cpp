@@ -13,30 +13,7 @@
 #include "bot.cpp"
 using namespace std;
 
-class arena
-{
-	private:
-		vector <bot> boty; 
-		int unikalnyNumer; 
-		int pozostalePrzedmiotyMax; 
-		double prawdopodobienstwoNastepnego;
-		
-		int nadajNazwe(int a);
-		void tura();
-		void inicjalizacja();
-		void licytujPrzedmiot(int wartosc);
-		
-	public:
-		arena();
-		arena(int l);
-		arena(vector<bot> bots);
-		
-		bool czyNastepny();
-		void dodajBota(bot a, int b = 0);
-		vector <bot> ranking();
-		void ustawieniaLicytacji(int a, double b);
-		void licytacja();
-};
+
 
 // ------------------------------- Konstruktory -------------------------------------------------
 
@@ -73,6 +50,7 @@ int arena::nadajNazwe(int a = 0)
 
 void arena::inicjalizacja()
 {
+	stala = 0;
 	unikalnyNumer = 0;
 	boty.resize(0);
 	srand(time(0));
@@ -86,7 +64,7 @@ void arena::licytujPrzedmiot(int wartosc)
 	kwota.resize(boty.size(), 0);
 	do
 	{
-		if(boty[licytujacy].wynik(stanLicytacji + 1, wartosc) && boty[licytujacy].sKonta >= stanLicytacji + 1) 
+		if(boty[licytujacy].wynik(this) && boty[licytujacy].sKonta >= stanLicytacji + 1) 
 		{
 			stanLicytacji++;
 			kwota[licytujacy] = stanLicytacji;
