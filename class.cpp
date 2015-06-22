@@ -63,23 +63,14 @@ class Arena
 {
 	private:
 		vector <Bot> group;
-		int unikalnyNumer;
-		int pozostalePrzedmiotyMax;
-		double prawdopodobienstwoNastepnego;
-
-		int nadajNazwe(int a);
-		void tura();
-		void inicjalizacja();
-		void licytujPrzedmiot(int wartosc);
 
 	public:
 		Arena();
 
-		bool czyNastepny();
-		void dodajBota(Bot a, int b = 0);
+		void addBot(Bot a);
+		void newGroup(vector<Bot>* a);
 		vector <Bot> play();
-		void ustawieniaLicytacji(int a, double b);
-		void licytacja();
+		void play(vector<Bot>* a);
 };
 
 class Population
