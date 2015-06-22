@@ -7,6 +7,8 @@
 #include <ctime>
 #include <iostream>
 #include <random>
+#include <sstream>
+#include <string>
 #include <vector>
 #include "class.cpp"
 using namespace std;
@@ -89,11 +91,20 @@ void Bot::print()
     cout << "bot [" << pA << "," << pB << "," << pC << "] with balance: " << balance << " value: " << value();
 }
 
+string Bot::toString()
+{
+    stringstream s;
+    s << "bot [" << pA << "," << pB << "," << pC << "] with balance: " << balance << " value: " << value();
+    return s.str();
+}
+
 int main()
 {
     Bot adam(1,1,1,1);
     adam.addResult(5);
     adam.addResult(10);
     adam.print();
+    cout << endl;
+    cout << adam.toString();
 }
 #endif

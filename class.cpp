@@ -77,7 +77,7 @@ class Arena
 
 		bool czyNastepny();
 		void dodajBota(Bot a, int b = 0);
-		vector <Bot> ranking();
+		vector <Bot> play();
 		void ustawieniaLicytacji(int a, double b);
 		void licytacja();
 };
@@ -86,6 +86,7 @@ class Population
 {
 	private:
 		int roundNumber;
+		int playersPerRound;
 		vector<Bot> bots;
 
 	public:
@@ -94,6 +95,9 @@ class Population
 		void gameSettings(int rN);
 		void addBot(Bot a);
 		void print();
+
+		void repopulate();
+		void newGeneration();
 };
 
 #endif

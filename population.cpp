@@ -34,4 +34,17 @@ void Population::print()
 }
 
 
+void Population::repopulate()
+{
+    while(bots.size()%playersPerRound != 0)
+        bots.push_back(bots[0]);
+}
+
+
+
+void Population::newGeneration()
+{
+
+}
+
 #endif

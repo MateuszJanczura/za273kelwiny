@@ -75,6 +75,15 @@ bool Arena::czyNastepny()
 	return false;
 }
 
+vector<Bot> Arena::play()
+{
+    for(int i=0; i<group.size(); ++i)
+    {
+        group[i].addResult(rand()%1000);
+    }
+    return group;
+}
+
 
 void Arena::ustawieniaLicytacji(int a, double b)
 {
