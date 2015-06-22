@@ -34,17 +34,25 @@ void Population::print()
 }
 
 
-void Population::repopulate()
+void Population::calibrate()
 {
-    while(bots.size()%playersPerRound != 0)
-        bots.push_back(bots[0]);
+    while(bots.size() < playersPerRound * multiplier)
+        bots.push_back(bots[rand()%bots.size()]);
 }
 
 
 
 void Population::newGeneration()
 {
-
+    calibrate();
+    int x;
+    for(int i=multiplier * playersPerRound-1; i>=0; i--)
+    {
+        x = rand()%(i+1);
+        swap(bots[i], bots[x]);
+        if(i%playersPerRound==0)
+            connectedArena->play(bots.begin()+i, bots.begin()+(i+playersPerRound));
+    }
 }
 
 #endif

@@ -70,7 +70,7 @@ class Arena
 		void addBot(Bot a);
 		void newGroup(vector<Bot>* a);
 		vector <Bot> play();
-		void play(vector<Bot>* a);
+		void play(vector<Bot>::iterator b, vector<Bot>::iterator e);
 };
 
 class Population
@@ -78,16 +78,22 @@ class Population
 	private:
 		int roundNumber;
 		int playersPerRound;
+		int multiplier;
 		vector<Bot> bots;
+		Arena * connectedArena;
 
 	public:
-		Population(int rN=0): roundNumber(rN) {};
+		Population(int rN=1, int pPR=1, int m=1): roundNumber(rN), playersPerRound(pPR), multiplier(m)
+		{
+            srand(time(0));
+            connectedArena = new Arena();
+        };
 
 		void gameSettings(int rN);
 		void addBot(Bot a);
 		void print();
 
-		void repopulate();
+		void calibrate();
 		void newGeneration();
 };
 

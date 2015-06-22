@@ -1,8 +1,6 @@
 #ifndef classArena
 #define classArena
 
-/* Wersja gdy (1) maksymalna liczba tur jest znana i prawdopodobienstow kolejnej licytacji znane, (2) standardowej wersji gry o dolara [brak oplaty za podbicie], (3) gra sekwencyjna lub jednoczesna, (4) kupione przedmioty nie sa dodawane do gotowki, a ranking zalezy od wartosci kupionych przedmiotow*/
-
 #include <vector>
 #include <cstdlib>
 #include <iostream>
@@ -28,7 +26,6 @@ void Arena::addBot(Bot a)
 void Arena::newGroup(vector<Bot>* a)
 {
     group.clear();
-    group.assign(a->begin(),a->end());
 }
 
 vector<Bot> Arena::play()
@@ -40,11 +37,16 @@ vector<Bot> Arena::play()
     return group;
 }
 
-void Arena::play(vector<Bot>* a)
+void Arena::play(vector<Bot>::iterator b, vector<Bot>::iterator e)
 {
-    newGroup(a);
+    group.assign(b,e);
     play();
-    *a = assign(group.begin(),group.end());
+    int x = 0;
+    for(vector<Bot>::iterator i = b; i!=e; i++)
+    {
+        *i = group[x];
+        ++x;
+    }
 }
 
 #endif
