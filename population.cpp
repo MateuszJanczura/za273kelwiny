@@ -42,17 +42,46 @@ void Population::calibrate()
 
 
 
-void Population::newGeneration()
+void Populatioon::newGeneration()
 {
     calibrate();
     int x;
-    for(int i=multiplier * playersPerRound-1; i>=0; i--)
+    for(int k=0; k<rounndNumber; k++)
     {
-        x = rand()%(i+1);
-        swap(bots[i], bots[x]);
-        if(i%playersPerRound==0)
-            connectedArena->play(bots.begin()+i, bots.begin()+(i+playersPerRound));
+        for(int i=multiplier * playersPerRound-1; i>=0; i--)
+        {
+            x = rand()%(i+1);
+            swap(bots[i], bots[x]);
+            if(i%playersPerRound==0)
+                connectedArena->play(bots.begin()+i, bots.begin()+(i+playersPerRound));
+        }
     }
+    vector<int> probability(bots.size());
+    for(int i=0; i<bots.size(); ++i)
+    {
+        probability[i] = probability[i-1] + bots[i-1].value().floor();
+    }
+
+    vector<Bot> newGen;
+    int prev, a, b;
+    for(int i=0; i<2* multiplier * playersPerRound - 1; ++i)
+    {
+        x = rand()%probability[bots.size()-1];
+        a = 0;
+        b = bots.size()-1;
+        while(a!=b)
+        {
+            if(x>probability[(a+b)/2]) a = (a+b)/2 + 1;
+            else b = (a+b)/2;
+        }
+        if(i%2==0) prev = a;
+        else
+        {
+            newGen.push_back(Bot(&bots[prev], &bots[a]));
+        }
+    }
+    bots.clear();
+    bots = newGen;
 }
 
 #endif
